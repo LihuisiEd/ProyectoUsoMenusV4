@@ -4,8 +4,11 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +29,34 @@ class MainActivity : AppCompatActivity() {
         }
         val adapter = AdaptadorElementos(llenarLista)
         lista.adapter = adapter
+
+        registerForContextMenu(lista)
+    }
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater:MenuInflater = menuInflater
+        inflater.inflate(R.menu.menucontextual, menu)
+    }
+    override fun onContextItemSelected(item:MenuItem): Boolean{
+        when (item.itemId){
+            R.id.nombre ->{
+                Toast.makeText(this,"Elegiste nombre",Toast.LENGTH_LONG).show()
+            }
+            R.id.semestre ->{
+                Toast.makeText(this,"Elegiste semestre",Toast.LENGTH_LONG).show()
+            }
+            R.id.email ->{
+                Toast.makeText(this,"Elegiste email",Toast.LENGTH_LONG).show()
+            }
+            R.id.carrera ->{
+                Toast.makeText(this,"Elegiste carrera",Toast.LENGTH_LONG).show()
+            }
+        }
+        return true
     }
     override fun onCreateOptionsMenu(menu: Menu?):Boolean{
         menuInflater.inflate(R.menu.menuprincipal, menu)
@@ -47,4 +78,5 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

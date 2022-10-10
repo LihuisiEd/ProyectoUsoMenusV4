@@ -24,6 +24,11 @@ class AdaptadorElementos (val ListaElementos:ArrayList<Elementos>): RecyclerView
     override fun onBindViewHolder(holder: AdaptadorElementos.ViewHolder, position: Int) {
         holder?.fTexto?.text=ListaElementos[position].texto
         holder?.fImagen?.setImageBitmap(ListaElementos[position].imagen)
+
+        holder.itemView.setOnCreateContextMenuListener{contextMenu, _, _ ->
+            contextMenu.setHeaderTitle("Se eligio opcion " + (position+1))
+             true
+        }
     }
 
     override fun getItemCount(): Int {
